@@ -5,16 +5,12 @@
 //  Created by Igor Naumenko on 27.08.2023.
 //
 
-import TemperatureUnitPickedService
 import DomainModels
 import GeocoderDataProvider
+import SharedModels
 import Foundation
 
-protocol IWeatherSearchOutputDelegate: AnyObject {
-    func cityWasPicked(city: CityDomain)
-}
-
-protocol IWeatherSearchPresenter {
+protocol IWeatherSearchPresenter: AnyObject {
     func getCities(for text: String)
     func cityWasPicked(at index: Int)
 }
@@ -24,7 +20,6 @@ final class WeatherSearchPresenter: IWeatherSearchPresenter {
     weak var output: IWeatherSearchOutputDelegate?
     
     private let geocoderDataProvider: IGeocoderDataProvider
-    private let unitPickedService: ITemperatureUnitPickedService
     
     private var cities: [CityDomain] = [] {
         didSet {
@@ -34,9 +29,8 @@ final class WeatherSearchPresenter: IWeatherSearchPresenter {
         }
     }
     
-    init(geocoderDataProvider: IGeocoderDataProvider, unitPickedService: ITemperatureUnitPickedService) {
+    init(geocoderDataProvider: IGeocoderDataProvider) {
         self.geocoderDataProvider = geocoderDataProvider
-        self.unitPickedService = unitPickedService
     }
     
     func getCities(for text: String) {
@@ -47,6 +41,7 @@ final class WeatherSearchPresenter: IWeatherSearchPresenter {
             case .success(let cities):
                 self.cities = cities
             case .failure(let error):
+                // TODO: Error
                 break
             }
         }
@@ -55,6 +50,5 @@ final class WeatherSearchPresenter: IWeatherSearchPresenter {
     func cityWasPicked(at index: Int) {
         let city = cities[index]
         output?.cityWasPicked(city: city)
-        view?.dismiss(animated: true)
     }
 }

@@ -5,13 +5,13 @@
 //  Created by Igor Naumenko on 27.08.2023.
 //
 
+import WeatherCoordinator
 import UIKit
-import WeatherDataProvider
-import TemperatureUnitPickedService
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    private var weatherCoordinator: WeatherCoordinator?
 
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -21,14 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let dataProvider = WeatherDataProviderAssembly.assembly()
-        let presenter = WeatherPresenter(weatherDataProvider: dataProvider, unitPickedService: TemperatureUnitPickedService())
-        dataProvider.delegate = presenter
-        let viewController = WeatherViewController(presenter: presenter)
-        presenter.view = viewController
-        window.rootViewController = viewController
+        weatherCoordinator = WeatherCoordinator(window: window)
+        weatherCoordinator?.start()
+        
         self.window = window
-        window.makeKeyAndVisible()
     }
     
     func sceneDidDisconnect(_ scene: UIScene) {

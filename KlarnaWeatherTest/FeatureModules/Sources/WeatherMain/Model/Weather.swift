@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SharedModels
 
 struct Weather {
     let city: City

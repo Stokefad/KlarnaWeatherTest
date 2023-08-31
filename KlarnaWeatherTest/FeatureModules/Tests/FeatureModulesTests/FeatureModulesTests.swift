@@ -1,11 +1,11 @@
 import XCTest
-@testable import NetworkService
+@testable import FeatureModules
 
-final class NetworkServiceTests: XCTestCase {
+final class FeatureModulesTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(NetworkService().text, "Hello, World!")
+        XCTAssertEqual(FeatureModules().text, "Hello, World!")
     }
 }

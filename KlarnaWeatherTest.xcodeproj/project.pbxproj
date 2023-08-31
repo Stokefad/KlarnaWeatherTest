@@ -7,14 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		78235E5A2A9E62DB0037BED9 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78235E592A9E62DB0037BED9 /* City.swift */; };
-		78235E5C2A9E63AF0037BED9 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78235E5B2A9E63AF0037BED9 /* CityTableViewCell.swift */; };
-		78235E5E2A9E693B0037BED9 /* CityDomainConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78235E5D2A9E693B0037BED9 /* CityDomainConverter.swift */; };
-		78235E702A9F4A2F0037BED9 /* BusinessLogic in Frameworks */ = {isa = PBXBuildFile; productRef = 78235E6F2A9F4A2F0037BED9 /* BusinessLogic */; };
-		78235E7C2A9F7DFE0037BED9 /* UIComponentsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 78235E7B2A9F7DFE0037BED9 /* UIComponentsLibrary */; };
-		78235E7E2A9FAAD20037BED9 /* TemperatureUnit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78235E7D2A9FAAD20037BED9 /* TemperatureUnit.swift */; };
-		78235E802A9FAB070037BED9 /* TemperatureUnitConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78235E7F2A9FAB070037BED9 /* TemperatureUnitConverter.swift */; };
-		78235E822A9FCE220037BED9 /* ErrorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78235E812A9FCE220037BED9 /* ErrorConverter.swift */; };
 		78EB84052A9B7FA400F2E5C9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB84042A9B7FA400F2E5C9 /* AppDelegate.swift */; };
 		78EB84072A9B7FA400F2E5C9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB84062A9B7FA400F2E5C9 /* SceneDelegate.swift */; };
 		78EB840E2A9B7FA500F2E5C9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 78EB840D2A9B7FA500F2E5C9 /* Assets.xcassets */; };
@@ -22,12 +14,9 @@
 		78EB841C2A9B7FA500F2E5C9 /* KlarnaWeatherTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB841B2A9B7FA500F2E5C9 /* KlarnaWeatherTestTests.swift */; };
 		78EB84262A9B7FA500F2E5C9 /* KlarnaWeatherTestUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB84252A9B7FA500F2E5C9 /* KlarnaWeatherTestUITests.swift */; };
 		78EB84282A9B7FA500F2E5C9 /* KlarnaWeatherTestUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB84272A9B7FA500F2E5C9 /* KlarnaWeatherTestUITestsLaunchTests.swift */; };
-		78EB84552A9BACB200F2E5C9 /* WeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB84542A9BACB200F2E5C9 /* WeatherViewController.swift */; };
-		78EB84572A9BACC000F2E5C9 /* WeatherSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB84562A9BACC000F2E5C9 /* WeatherSearchViewController.swift */; };
-		78EB84592A9BADCB00F2E5C9 /* WeatherPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB84582A9BADCB00F2E5C9 /* WeatherPresenter.swift */; };
-		78EB845B2A9BADDC00F2E5C9 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB845A2A9BADDC00F2E5C9 /* Weather.swift */; };
-		78EB845D2A9BB11B00F2E5C9 /* WeatherSearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB845C2A9BB11B00F2E5C9 /* WeatherSearchPresenter.swift */; };
-		78EB84612A9BD2FF00F2E5C9 /* WeatherDomainConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EB84602A9BD2FF00F2E5C9 /* WeatherDomainConverter.swift */; };
+		78F5C6002AA132B900887AC4 /* BusinessLogic in Frameworks */ = {isa = PBXBuildFile; productRef = 78F5C5FF2AA132B900887AC4 /* BusinessLogic */; };
+		78F5C6032AA132F800887AC4 /* UIComponentsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 78F5C6022AA132F800887AC4 /* UIComponentsLibrary */; };
+		78F5C6062AA1360F00887AC4 /* FeatureModules in Frameworks */ = {isa = PBXBuildFile; productRef = 78F5C6052AA1360F00887AC4 /* FeatureModules */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,14 +37,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		78235E592A9E62DB0037BED9 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
-		78235E5B2A9E63AF0037BED9 /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
-		78235E5D2A9E693B0037BED9 /* CityDomainConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDomainConverter.swift; sourceTree = "<group>"; };
-		78235E6E2A9F49F60037BED9 /* BusinessLogic */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BusinessLogic; path = KlarnaWeatherTest/BusinessLogic; sourceTree = "<group>"; };
-		78235E7A2A9F7DD80037BED9 /* UIComponentsLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UIComponentsLibrary; path = KlarnaWeatherTest/UIComponentsLibrary; sourceTree = "<group>"; };
-		78235E7D2A9FAAD20037BED9 /* TemperatureUnit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUnit.swift; sourceTree = "<group>"; };
-		78235E7F2A9FAB070037BED9 /* TemperatureUnitConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureUnitConverter.swift; sourceTree = "<group>"; };
-		78235E812A9FCE220037BED9 /* ErrorConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorConverter.swift; sourceTree = "<group>"; };
 		78EB84012A9B7FA400F2E5C9 /* KlarnaWeatherTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlarnaWeatherTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78EB84042A9B7FA400F2E5C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78EB84062A9B7FA400F2E5C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,12 +48,9 @@
 		78EB84212A9B7FA500F2E5C9 /* KlarnaWeatherTestUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KlarnaWeatherTestUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		78EB84252A9B7FA500F2E5C9 /* KlarnaWeatherTestUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlarnaWeatherTestUITests.swift; sourceTree = "<group>"; };
 		78EB84272A9B7FA500F2E5C9 /* KlarnaWeatherTestUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KlarnaWeatherTestUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		78EB84542A9BACB200F2E5C9 /* WeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewController.swift; sourceTree = "<group>"; };
-		78EB84562A9BACC000F2E5C9 /* WeatherSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSearchViewController.swift; sourceTree = "<group>"; };
-		78EB84582A9BADCB00F2E5C9 /* WeatherPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherPresenter.swift; sourceTree = "<group>"; };
-		78EB845A2A9BADDC00F2E5C9 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
-		78EB845C2A9BB11B00F2E5C9 /* WeatherSearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSearchPresenter.swift; sourceTree = "<group>"; };
-		78EB84602A9BD2FF00F2E5C9 /* WeatherDomainConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherDomainConverter.swift; sourceTree = "<group>"; };
+		78F5C5FE2AA1325E00887AC4 /* BusinessLogic */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = BusinessLogic; path = KlarnaWeatherTest/BusinessLogic; sourceTree = "<group>"; };
+		78F5C6012AA132D400887AC4 /* UIComponentsLibrary */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = UIComponentsLibrary; path = KlarnaWeatherTest/UIComponentsLibrary; sourceTree = "<group>"; };
+		78F5C6042AA1331200887AC4 /* FeatureModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FeatureModules; path = KlarnaWeatherTest/FeatureModules; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,8 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78235E7C2A9F7DFE0037BED9 /* UIComponentsLibrary in Frameworks */,
-				78235E702A9F4A2F0037BED9 /* BusinessLogic in Frameworks */,
+				78F5C6062AA1360F00887AC4 /* FeatureModules in Frameworks */,
+				78F5C6032AA132F800887AC4 /* UIComponentsLibrary in Frameworks */,
+				78F5C6002AA132B900887AC4 /* BusinessLogic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,31 +91,11 @@
 		78235E6D2A9F49F60037BED9 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				78235E7A2A9F7DD80037BED9 /* UIComponentsLibrary */,
-				78235E6E2A9F49F60037BED9 /* BusinessLogic */,
+				78F5C6042AA1331200887AC4 /* FeatureModules */,
+				78F5C6012AA132D400887AC4 /* UIComponentsLibrary */,
+				78F5C5FE2AA1325E00887AC4 /* BusinessLogic */,
 			);
 			name = Packages;
-			sourceTree = "<group>";
-		};
-		78235E772A9F7B2E0037BED9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				78235E592A9E62DB0037BED9 /* City.swift */,
-				78235E5D2A9E693B0037BED9 /* CityDomainConverter.swift */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
-		78235E782A9F7B3C0037BED9 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				78EB845A2A9BADDC00F2E5C9 /* Weather.swift */,
-				78EB84602A9BD2FF00F2E5C9 /* WeatherDomainConverter.swift */,
-				78235E7D2A9FAAD20037BED9 /* TemperatureUnit.swift */,
-				78235E7F2A9FAB070037BED9 /* TemperatureUnitConverter.swift */,
-				78235E812A9FCE220037BED9 /* ErrorConverter.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		78EB83F82A9B7FA400F2E5C9 = {
@@ -164,8 +123,6 @@
 		78EB84032A9B7FA400F2E5C9 /* KlarnaWeatherTest */ = {
 			isa = PBXGroup;
 			children = (
-				78EB84532A9BAC9400F2E5C9 /* WeatherSearchPresentation */,
-				78EB84522A9BAC7300F2E5C9 /* WeatherPresentation */,
 				78EB84042A9B7FA400F2E5C9 /* AppDelegate.swift */,
 				78EB84062A9B7FA400F2E5C9 /* SceneDelegate.swift */,
 				78EB840D2A9B7FA500F2E5C9 /* Assets.xcassets */,
@@ -192,27 +149,6 @@
 			path = KlarnaWeatherTestUITests;
 			sourceTree = "<group>";
 		};
-		78EB84522A9BAC7300F2E5C9 /* WeatherPresentation */ = {
-			isa = PBXGroup;
-			children = (
-				78235E782A9F7B3C0037BED9 /* Model */,
-				78EB84542A9BACB200F2E5C9 /* WeatherViewController.swift */,
-				78EB84582A9BADCB00F2E5C9 /* WeatherPresenter.swift */,
-			);
-			path = WeatherPresentation;
-			sourceTree = "<group>";
-		};
-		78EB84532A9BAC9400F2E5C9 /* WeatherSearchPresentation */ = {
-			isa = PBXGroup;
-			children = (
-				78235E772A9F7B2E0037BED9 /* Model */,
-				78EB84562A9BACC000F2E5C9 /* WeatherSearchViewController.swift */,
-				78EB845C2A9BB11B00F2E5C9 /* WeatherSearchPresenter.swift */,
-				78235E5B2A9E63AF0037BED9 /* CityTableViewCell.swift */,
-			);
-			path = WeatherSearchPresentation;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -230,8 +166,9 @@
 			);
 			name = KlarnaWeatherTest;
 			packageProductDependencies = (
-				78235E6F2A9F4A2F0037BED9 /* BusinessLogic */,
-				78235E7B2A9F7DFE0037BED9 /* UIComponentsLibrary */,
+				78F5C5FF2AA132B900887AC4 /* BusinessLogic */,
+				78F5C6022AA132F800887AC4 /* UIComponentsLibrary */,
+				78F5C6052AA1360F00887AC4 /* FeatureModules */,
 			);
 			productName = KlarnaWeatherTest;
 			productReference = 78EB84012A9B7FA400F2E5C9 /* KlarnaWeatherTest.app */;
@@ -347,18 +284,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				78235E5A2A9E62DB0037BED9 /* City.swift in Sources */,
-				78EB84552A9BACB200F2E5C9 /* WeatherViewController.swift in Sources */,
-				78EB84572A9BACC000F2E5C9 /* WeatherSearchViewController.swift in Sources */,
-				78EB845B2A9BADDC00F2E5C9 /* Weather.swift in Sources */,
-				78EB84612A9BD2FF00F2E5C9 /* WeatherDomainConverter.swift in Sources */,
-				78235E822A9FCE220037BED9 /* ErrorConverter.swift in Sources */,
-				78235E5E2A9E693B0037BED9 /* CityDomainConverter.swift in Sources */,
-				78235E7E2A9FAAD20037BED9 /* TemperatureUnit.swift in Sources */,
-				78EB845D2A9BB11B00F2E5C9 /* WeatherSearchPresenter.swift in Sources */,
-				78EB84592A9BADCB00F2E5C9 /* WeatherPresenter.swift in Sources */,
-				78235E5C2A9E63AF0037BED9 /* CityTableViewCell.swift in Sources */,
-				78235E802A9FAB070037BED9 /* TemperatureUnitConverter.swift in Sources */,
 				78EB84052A9B7FA400F2E5C9 /* AppDelegate.swift in Sources */,
 				78EB84072A9B7FA400F2E5C9 /* SceneDelegate.swift in Sources */,
 			);
@@ -694,13 +619,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		78235E6F2A9F4A2F0037BED9 /* BusinessLogic */ = {
+		78F5C5FF2AA132B900887AC4 /* BusinessLogic */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BusinessLogic;
 		};
-		78235E7B2A9F7DFE0037BED9 /* UIComponentsLibrary */ = {
+		78F5C6022AA132F800887AC4 /* UIComponentsLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = UIComponentsLibrary;
+		};
+		78F5C6052AA1360F00887AC4 /* FeatureModules */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FeatureModules;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

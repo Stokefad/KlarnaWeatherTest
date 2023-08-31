@@ -8,8 +8,8 @@
 import DomainModels
 import Foundation
 
-final class CityDomainConverter {
-    static func convert(_ domain: CityDomain) -> City {
+public final class CityDomainConverter {
+    public static func convert(_ domain: CityDomain) -> City {
         .init(name: domain.name + ", " + domain.country + ", " + domain.state)
     }
 }

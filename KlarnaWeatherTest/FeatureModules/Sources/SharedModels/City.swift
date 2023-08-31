@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct City {
-    let name: String
+public struct City {
+    public let name: String
 }

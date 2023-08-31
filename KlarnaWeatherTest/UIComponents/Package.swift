@@ -4,12 +4,12 @@
 import PackageDescription
 
 let package = Package(
-    name: "BusinessLogic",
+    name: "UIComponents",
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "BusinessLogic",
-            targets: ["NetworkService", "GeocoderDataProvider", "DomainModels", "WeatherDataProvider", "LocationService", "TemperatureUnitPickedService"]),
+            name: "UIComponents",
+            targets: ["UIComponents"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -19,25 +19,10 @@ let package = Package(
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "NetworkService",
-            dependencies: []),
-        .target(
-            name: "GeocoderDataProvider",
-            dependencies: ["NetworkService", "DomainModels"]),
-        .target(
-            name: "DomainModels",
-            dependencies: []),
-        .target(
-            name: "WeatherDataProvider",
-            dependencies: ["DomainModels", "GeocoderDataProvider"]),
-        .target(
-            name: "LocationService",
-            dependencies: []),
-        .target(
-            name: "TemperatureUnitPickedService",
+            name: "UIComponents",
             dependencies: []),
         .testTarget(
-            name: "BusinessLogicTests",
+            name: "UIComponentsTests",
             dependencies: []),
     ]
 )

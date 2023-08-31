@@ -5,23 +5,20 @@
 //  Created by Igor Naumenko on 27.08.2023.
 //
 
+import WeatherCoordinator
 import UIKit
-import WeatherDataProvider
-import TemperatureUnitPickedService
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
+    private var weatherCoordinator: WeatherCoordinator?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow()
-        let dataProvider = WeatherDataProviderAssembly.assembly()
-        let presenter = WeatherPresenter(weatherDataProvider: dataProvider, unitPickedService: TemperatureUnitPickedService())
-        dataProvider.delegate = presenter
-        let viewController = WeatherViewController(presenter: presenter)
-        presenter.view = viewController
-        window?.rootViewController = viewController
-        window?.makeKeyAndVisible()
+        let window = UIWindow()
+        weatherCoordinator = WeatherCoordinator(window: window)
+        weatherCoordinator?.start()
+        
+        self.window = window
         
         return true
     }

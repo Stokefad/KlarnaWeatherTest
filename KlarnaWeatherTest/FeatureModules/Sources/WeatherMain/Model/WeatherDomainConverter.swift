@@ -7,6 +7,7 @@
 
 import TemperatureUnitPickedService
 import DomainModels
+import SharedModels
 import Foundation
 
 final class WeatherDomainConverter {

@@ -6,6 +6,7 @@
 //
 
 import UIComponentsLibrary
+import SharedModels
 import UIKit
 import Foundation
 
