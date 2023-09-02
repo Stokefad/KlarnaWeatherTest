@@ -9,6 +9,7 @@ import TemperatureUnitPickedService
 import DomainModels
 import GeocoderDataProvider
 import WeatherDataProvider
+import SharedModels
 import Foundation
 
 protocol IWeatherPresenter: AnyObject {
@@ -68,6 +69,8 @@ extension WeatherPresenter: IWeatherDataProviderDelegate {
     }
     
     func errorOccured(error: WeatherDataProviderError) {
-        view?.present(errorTitle: "Error", errorText: ErrorConverter.convert(error))
+        DispatchQueue.main.async {
+            self.view?.present(errorTitle: "Error", errorText: ErrorConverter.convert(error))
+        }
     }
 }

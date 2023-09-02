@@ -9,10 +9,12 @@ import DomainModels
 import GeocoderDataProvider
 import SharedModels
 import Foundation
+import Utils
 
 protocol IWeatherSearchPresenter: AnyObject {
-    func getCities(for text: String)
+    func searchWasPressed(for text: String)
     func cityWasPicked(at index: Int)
+    func searchTextWasChanged(text: String)
 }
 
 final class WeatherSearchPresenter: IWeatherSearchPresenter {
@@ -20,6 +22,7 @@ final class WeatherSearchPresenter: IWeatherSearchPresenter {
     weak var output: IWeatherSearchOutputDelegate?
     
     private let geocoderDataProvider: IGeocoderDataProvider
+    private let debouncer: Debouncer
     
     private var cities: [CityDomain] = [] {
         didSet {
@@ -29,11 +32,26 @@ final class WeatherSearchPresenter: IWeatherSearchPresenter {
         }
     }
     
-    init(geocoderDataProvider: IGeocoderDataProvider) {
+    init(geocoderDataProvider: IGeocoderDataProvider, debouncer: Debouncer) {
         self.geocoderDataProvider = geocoderDataProvider
+        self.debouncer = debouncer
     }
     
-    func getCities(for text: String) {
+    func searchWasPressed(for text: String) {
+        search(text: text)
+    }
+    
+    func searchTextWasChanged(text: String) {
+        debouncer.debounce(interval: 0.4) { [weak self] in
+            self?.search(text: text)
+        }
+    }
+    
+    private func search(text: String) {
+        guard !text.isEmpty else {
+            cities = []
+            return
+        }
         geocoderDataProvider.getCities(for: text) { [weak self] result in
             guard let self = self else { return }
             

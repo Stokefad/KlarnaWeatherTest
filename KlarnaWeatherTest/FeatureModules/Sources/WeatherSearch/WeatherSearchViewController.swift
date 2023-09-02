@@ -32,6 +32,7 @@ final class WeatherSearchViewController: UIViewController, IWeatherSearchViewCon
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         searchBar.searchBarStyle = .minimal
         searchBar.backgroundColor = ColorPalette.backgroundColor
+        searchBar.delegate = self
         return searchBar
     }()
     
@@ -92,8 +93,8 @@ final class WeatherSearchViewController: UIViewController, IWeatherSearchViewCon
     
     @objc
     private func search() {
-        guard let text = searchBar.text, text.count > 2 else { return }
-        presenter.getCities(for: text)
+        guard let text = searchBar.text else { return }
+        presenter.searchWasPressed(for: text)
     }
 }
 
@@ -111,5 +112,11 @@ extension WeatherSearchViewController: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         presenter.cityWasPicked(at: indexPath.row)
+    }
+}
+
+extension WeatherSearchViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        presenter.searchTextWasChanged(text: searchText)
     }
 }
