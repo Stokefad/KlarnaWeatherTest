@@ -40,9 +40,8 @@ final class WeatherSearchPresenter: IWeatherSearchPresenter {
             switch result {
             case .success(let cities):
                 self.cities = cities
-            case .failure(let error):
-                // TODO: Error
-                break
+            case .failure:
+                self.cities = []
             }
         }
     }

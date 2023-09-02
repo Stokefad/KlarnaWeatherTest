@@ -59,6 +59,7 @@ final class WeatherViewController: UIViewController, IWeatherViewController {
     func present(errorTitle: String, errorText: String) {
         let action = UIAlertAction(title: "Ok", style: .default)
         let alertController = UIAlertController(title: errorTitle, message: errorText, preferredStyle: .alert)
+        alertController.addAction(action)
         present(alertController, animated: true)
     }
     

@@ -62,6 +62,13 @@ final class WeatherSearchViewController: UIViewController, IWeatherSearchViewCon
         setupUI()
     }
     
+    func present(errorTitle: String, errorText: String) {
+        let action = UIAlertAction(title: "Ok", style: .default)
+        let alertController = UIAlertController(title: errorTitle, message: errorText, preferredStyle: .alert)
+        alertController.addAction(action)
+        present(alertController, animated: true)
+    }
+    
     private func setupUI() {
         view.addSubview(searchBar)
         view.addSubview(searchButton)
