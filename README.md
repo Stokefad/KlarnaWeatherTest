@@ -35,6 +35,10 @@ For location search:
 2) User picks location
 3) Steps 2-3 as for current location
 
+# Navigation
+
+Navigation is provided with WeatherCoordinator. It could be extended with other coordinators for flows and root AppCoordinator but it's not necessary for 2 screen app
+
 # Testing
 
 Most of classes are injected with a protocol, so it's easy to mock service/presenter/viewController in order to test them. 
