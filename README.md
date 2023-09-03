@@ -46,7 +46,7 @@ There are several example tests written for BusinessLogic package
 
 # Dark/light mode support
 
-Asset colors are used for theme support (Color palette for this app is just 3 colors but could be extended easily)
+Asset colors are used for theme support (Color palette for this app is just 5 colors but could be extended easily)
 
 # Forecast react on location change
 
