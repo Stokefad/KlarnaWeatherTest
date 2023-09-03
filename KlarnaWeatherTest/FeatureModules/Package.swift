@@ -9,7 +9,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "FeatureModules",
-            targets: ["WeatherMain", "WeatherSearch", "WeatherCoordinator", "SharedModels", "Utils"]),
+            targets: ["WeatherMain", "WeatherSearch", "WeatherCoordinator", "SharedModels", "Utils", "AppCoordinator"]),
     ],
     dependencies: [
         .package(path: "./UIComponentsLibrary"),
@@ -32,6 +32,9 @@ let package = Package(
             dependencies: []),
         .target(
             name: "Utils",
+            dependencies: []),
+        .target(
+            name: "AppCoordinator",
             dependencies: []),
         .testTarget(
             name: "FeatureModulesTests",

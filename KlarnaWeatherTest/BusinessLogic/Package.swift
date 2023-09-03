@@ -9,7 +9,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "BusinessLogic",
-            targets: ["NetworkService", "GeocoderDataProvider", "DomainModels", "WeatherDataProvider", "LocationService", "TemperatureUnitPickedService"]),
+            targets: ["NetworkService", "GeocoderDataProvider", "DomainModels", "WeatherDataProvider", "LocationService", "TemperatureUnitPickedService", "ReachabilityService"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -35,6 +35,9 @@ let package = Package(
             dependencies: []),
         .target(
             name: "TemperatureUnitPickedService",
+            dependencies: []),
+        .target(
+            name: "ReachabilityService",
             dependencies: []),
         .testTarget(
             name: "BusinessLogicTests",

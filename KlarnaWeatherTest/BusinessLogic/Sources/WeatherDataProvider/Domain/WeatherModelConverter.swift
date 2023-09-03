@@ -9,11 +9,11 @@ import DomainModels
 import Foundation
 
 protocol IWeatherModelConverter {
-    func convert(_ dto: WeatherDTO, in city: CityDomain) -> WeatherDomain
+    func convert(_ dto: WeatherDTO, in city: CityDomain, isInUserLocation: Bool) -> WeatherDomain
 }
 
 final class WeatherModelConverter: IWeatherModelConverter {
-    func convert(_ dto: WeatherDTO, in city: CityDomain) -> WeatherDomain {
-        WeatherDomain(city: city, temperature: dto.main.temp)
+    func convert(_ dto: WeatherDTO, in city: CityDomain, isInUserLocation: Bool) -> WeatherDomain {
+        WeatherDomain(city: city, temperature: dto.main.temp, isInUserLocation: isInUserLocation)
     }
 }

@@ -10,10 +10,12 @@ import GeocoderDataProvider
 import LocationService
 import Foundation
 import CoreLocation
+import ReachabilityService
 
 public protocol IWeatherDataProviderDelegate: AnyObject {
     func didUpdateCurrentWeather()
-    func errorOccured(error: WeatherDataProviderError)
+    func errorOccured(error: WeatherDataProviderError, isNetworkAvailable: Bool)
+    func askUserToGrantLocationUsagePermission()
 }
 
 public enum WeatherDataProviderError: Error {
@@ -27,6 +29,9 @@ public class WeatherDataProvider: IWeatherDataProvider {
     private let geocoderDataProvider: IGeocoderDataProvider
     private let locationService: ILocationService
     private let weatherModelConverter: IWeatherModelConverter
+    private let reachabilityService: IReachabilityService
+    
+    private var latestCompletion: (() -> ())?
     
     public var currentWeather: WeatherDomain? {
         didSet {
@@ -38,49 +43,94 @@ public class WeatherDataProvider: IWeatherDataProvider {
         networkService: IWeatherNetworkService,
         locationService: ILocationService,
         geocoderDataProvider: IGeocoderDataProvider,
-        weatherModelConverter: IWeatherModelConverter
+        weatherModelConverter: IWeatherModelConverter,
+        reachabilityService: IReachabilityService
     ) {
         self.networkService = networkService
         self.locationService = locationService
         self.geocoderDataProvider = geocoderDataProvider
         self.weatherModelConverter = weatherModelConverter
+        self.reachabilityService = reachabilityService
     }
     
     public func updateCurrentLocationWeather() {
+        guard !locationService.shouldAskForLocationServicesUse else {
+            delegate?.askUserToGrantLocationUsagePermission()
+            return
+        }
         locationService.getCurrentLocation { [weak self] location in
-            guard let location else {
-                self?.delegate?.errorOccured(error: .locationError)
+            guard let location, let self, self.currentWeather?.isInUserLocation == true || self.currentWeather == nil else {
                 return
             }
             
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             
-            self?.geocoderDataProvider.getCity(lat: lat, lon: lon, completion: { [weak self] result in
-                switch result {
-                case .success(let city):
-                    self?.updateWeather(city: city)
-                case .failure:
-                    self?.currentWeather = nil
-                    self?.delegate?.errorOccured(error: .geocoderError)
-                }
-            })
+            self.geocoderGetCity(lat: lat, lon: lon)
         }
     }
     
     public func updateWeather(city: CityDomain) {
+        requestWeather(city: city, isInUserLocation: false)
+    }
+    
+    private func requestWeather(city: CityDomain, isInUserLocation: Bool) {
         networkService.requestWeather(
             lat: city.lat,
             lon: city.lon,
             completion: { [weak self] result in
                 switch result {
                 case let .success(weather):
-                    self?.currentWeather = self?.weatherModelConverter.convert(weather, in: city)
+                    self?.currentWeather = self?.weatherModelConverter.convert(weather, in: city, isInUserLocation: isInUserLocation)
                 case .failure:
-                    self?.currentWeather = nil
-                    self?.delegate?.errorOccured(error: .noWeatherForLocation)
+                    self?.updateWeatherErrorOccured(city: city)
                 }
             }
         )
+    }
+    
+    private func geocoderGetCity(lat: Double, lon: Double) {
+        geocoderDataProvider.getCity(lat: lat, lon: lon, completion: { [weak self] result in
+            switch result {
+            case .success(let city):
+                self?.requestWeather(city: city, isInUserLocation: true)
+            case .failure:
+                self?.geocoderErrorOccured(lat: lat, lon: lon)
+            }
+        })
+    }
+    
+    private func geocoderErrorOccured(lat: Double, lon: Double) {
+        currentWeather = nil
+        delegate?.errorOccured(error: .geocoderError, isNetworkAvailable: reachabilityService.isConnectedToNetwork())
+        
+        subscribeToReachabilityChanges { [weak self] in
+            self?.geocoderGetCity(lat: lat, lon: lon)
+        }
+    }
+    
+    private func updateWeatherErrorOccured(city: CityDomain) {
+        currentWeather = nil
+        delegate?.errorOccured(error: .noWeatherForLocation, isNetworkAvailable: reachabilityService.isConnectedToNetwork())
+        
+        subscribeToReachabilityChanges { [weak self] in
+            self?.requestWeather(city: city, isInUserLocation: false)
+        }
+    }
+    
+    private func subscribeToReachabilityChanges(completion: @escaping () -> ()) {
+        guard !reachabilityService.isConnectedToNetwork() else { return }
+        
+        latestCompletion = completion
+        NotificationCenter.default.addObserver(self, selector: #selector(reachabilityWasChanged), name: Notification.Name(rawValue: "NetworkStatusChanged"), object: nil)
+    }
+    
+    @objc
+    private func reachabilityWasChanged() {
+        guard reachabilityService.isConnectedToNetwork() else { return }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.latestCompletion?()
+        }
     }
 }

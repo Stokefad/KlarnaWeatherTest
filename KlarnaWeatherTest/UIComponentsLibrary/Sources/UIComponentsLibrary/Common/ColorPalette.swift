@@ -12,4 +12,6 @@ public final class ColorPalette {
     public static let backgroundColor = UIColor(named: "BackgroundColor")!
     public static let textColor = UIColor(named: "TextColor")!
     public static let accentColor = UIColor(named: "AccentColor")!
+    public static let alertColor = UIColor(named: "AlertColor")!
+    public static let alertAccent = UIColor(named: "AlertAccent")!
 }

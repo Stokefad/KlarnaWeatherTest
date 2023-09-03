@@ -11,7 +11,7 @@ import Foundation
 
 protocol IWeatherViewController: UIViewController {
     var weather: Weather? { get set }
-    func present(errorTitle: String, errorText: String)
+    func present(title: String, message: String, completion: (() -> ())?)
 }
 
 final class WeatherViewController: UIViewController, IWeatherViewController {
@@ -56,10 +56,14 @@ final class WeatherViewController: UIViewController, IWeatherViewController {
         presenter.viewDidLoad()
     }
     
-    func present(errorTitle: String, errorText: String) {
-        let action = UIAlertAction(title: "Ok", style: .default)
-        let alertController = UIAlertController(title: errorTitle, message: errorText, preferredStyle: .alert)
-        alertController.addAction(action)
+    func present(title: String, message: String, completion: (() -> ())?) {
+        let actionSettings = UIAlertAction(title: "Settings", style: .default) { _ in
+            completion?()
+        }
+        let actionOk = UIAlertAction(title: "Ok", style: .cancel)
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(actionOk)
+        alertController.addAction(actionSettings)
         present(alertController, animated: true)
     }
     
@@ -68,7 +72,7 @@ final class WeatherViewController: UIViewController, IWeatherViewController {
         view.addSubview(anotherLocationButton)
         view.addSubview(segmentControl)
         
-        segmentControl.topAnchor.constraint(equalTo: view.topAnchor, constant: Indents.big * 3).isActive = true
+        segmentControl.topAnchor.constraint(equalTo: view.topAnchor, constant: Indents.big * 4).isActive = true
         segmentControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Indents.regular).isActive = true
         segmentControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Indents.regular).isActive = true
         segmentControl.bottomAnchor.constraint(lessThanOrEqualTo: weatherInfoView.bottomAnchor, constant: -Indents.regular).isActive = true

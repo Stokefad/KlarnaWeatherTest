@@ -6,12 +6,15 @@
 //
 
 import WeatherCoordinator
+import AppCoordinator
+import ReachabilityService
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     private var weatherCoordinator: WeatherCoordinator?
+    private var appCoordinator: AppCoordinator?
 
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -23,6 +26,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         weatherCoordinator = WeatherCoordinator(window: window)
         weatherCoordinator?.start()
+        
+        let reachabilityService = ReachabilityService()
+        appCoordinator = AppCoordinator(window: window, reachabilityService: reachabilityService)
+        
+        reachabilityService.startObservingNetworkChange()
         
         self.window = window
     }

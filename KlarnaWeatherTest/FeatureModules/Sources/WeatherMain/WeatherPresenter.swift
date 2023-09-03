@@ -11,6 +11,7 @@ import GeocoderDataProvider
 import WeatherDataProvider
 import SharedModels
 import Foundation
+import UIKit
 
 protocol IWeatherPresenter: AnyObject {
     var availableTemperatureUnitsForPresentation: [TemperatureUnit] { get }
@@ -74,15 +75,25 @@ final class WeatherPresenter: IWeatherPresenter {
 }
 
 extension WeatherPresenter: IWeatherDataProviderDelegate {
-    func didUpdateCurrentWeather() {
+    public func didUpdateCurrentWeather() {
         DispatchQueue.main.async {
             self.view?.weather = self.weatherDataProvider.currentWeather.map { self.weatherDomainConverter.convert($0, currentTemperatureUnit: self.unitPickedService.currentUnit) }
         }
     }
     
-    func errorOccured(error: WeatherDataProviderError) {
+    public func askUserToGrantLocationUsagePermission() {
         DispatchQueue.main.async {
-            self.view?.present(errorTitle: "Error", errorText: self.errorConverter.convert(error))
+            self.view?.present(title: "Location permission", message: "Please grant permission to use your location in order to show current weather", completion: {
+                guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                UIApplication.shared.open(url)
+            })
+        }
+    }
+    
+    public func errorOccured(error: WeatherDataProviderError, isNetworkAvailable: Bool) {
+        guard isNetworkAvailable else { return }
+        DispatchQueue.main.async {
+            self.view?.present(title: "Error", message: self.errorConverter.convert(error), completion: nil)
         }
     }
 }

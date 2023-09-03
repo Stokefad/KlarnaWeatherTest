@@ -40,10 +40,10 @@ public final class WeatherMainAssembly {
             errorConverter: ErrorConverter(),
             temperatureUnitConverter: TemperatureUnitConverter()
         )
-        dataProvider.delegate = presenter
         let viewController = WeatherViewController(presenter: presenter)
         presenter.view = viewController
         presenter.delegate = delegate
+        dataProvider.delegate = presenter
         
         return WeatherMainModule(presenter: presenter, viewController: viewController)
     }

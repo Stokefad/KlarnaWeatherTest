@@ -7,11 +7,18 @@
 
 import LocationService
 import GeocoderDataProvider
+import ReachabilityService
 import NetworkService
 import Foundation
 
 public final class WeatherDataProviderAssembly {
     public static func assembly() -> WeatherDataProvider {
-        WeatherDataProvider(networkService: WeatherNetworkService(networkService: NetworkService(dataTaskFactory: URLSession.shared)), locationService: LocationService(), geocoderDataProvider: GeocoderAssembly.assembly(), weatherModelConverter: WeatherModelConverter())
+        WeatherDataProvider(
+            networkService: WeatherNetworkService(networkService: NetworkService(dataTaskFactory: URLSession.shared)),
+            locationService: LocationService(),
+            geocoderDataProvider: GeocoderAssembly.assembly(),
+            weatherModelConverter: WeatherModelConverter(),
+            reachabilityService: ReachabilityService()
+        )
     }
 }
