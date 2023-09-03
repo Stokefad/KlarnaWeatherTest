@@ -4,7 +4,7 @@ Project consists of 3 main packages - BusinessLogic, UIComponentsLibrary and Fea
 
 # Usage
 
-After cloning repo, it's required to add your open weather api key with following code in BusinessLogic.Domain models:
+After cloning repo, you need to add your open weather api key with following code in BusinessLogic.Domain models:
 ```
 public enum APIKeys {
     public static let openWeatherKey = "your_key"
