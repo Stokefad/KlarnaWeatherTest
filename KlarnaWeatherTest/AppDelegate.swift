@@ -5,21 +5,13 @@
 //  Created by Igor Naumenko on 27.08.2023.
 //
 
-import WeatherCoordinator
 import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
-    private var weatherCoordinator: WeatherCoordinator?
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let window = UIWindow()
-        weatherCoordinator = WeatherCoordinator(window: window)
-        weatherCoordinator?.start()
-        
-        self.window = window
-        
+    
         return true
     }
     
