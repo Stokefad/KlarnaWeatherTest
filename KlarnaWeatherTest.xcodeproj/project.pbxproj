@@ -37,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		789DE8792AA4B7E20087CA98 /* BusinessLogicTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = BusinessLogicTests.xctestplan; sourceTree = "<group>"; };
 		78EB84012A9B7FA400F2E5C9 /* KlarnaWeatherTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KlarnaWeatherTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		78EB84042A9B7FA400F2E5C9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		78EB84062A9B7FA400F2E5C9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 		78EB83F82A9B7FA400F2E5C9 = {
 			isa = PBXGroup;
 			children = (
+				789DE8792AA4B7E20087CA98 /* BusinessLogicTests.xctestplan */,
 				78235E6D2A9F49F60037BED9 /* Packages */,
 				78EB84032A9B7FA400F2E5C9 /* KlarnaWeatherTest */,
 				78EB841A2A9B7FA500F2E5C9 /* KlarnaWeatherTestTests */,
@@ -505,7 +507,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KlarnaWeatherTest.app/KlarnaWeatherTest";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G3P284NUFU;
@@ -525,7 +527,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/KlarnaWeatherTest.app/KlarnaWeatherTest";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G3P284NUFU;

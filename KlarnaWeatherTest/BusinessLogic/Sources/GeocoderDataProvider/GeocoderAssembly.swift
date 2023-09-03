@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import NetworkService
 
 public final class GeocoderAssembly {
     public static func assembly() -> GeocoderDataProvider {
-        GeocoderDataProvider(geocoderNetworkService: GeocoderNetworkService(), cityDTOConverter: CityDTOConverter())
+        GeocoderDataProvider(geocoderNetworkService: GeocoderNetworkService(networkService: NetworkService(dataTaskFactory: URLSession.shared)), cityDTOConverter: CityDTOConverter())
     }
 }

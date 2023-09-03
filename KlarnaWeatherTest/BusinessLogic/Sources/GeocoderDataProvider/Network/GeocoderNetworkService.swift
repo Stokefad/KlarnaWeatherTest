@@ -9,16 +9,20 @@ import NetworkService
 import DomainModels
 import Foundation
 
-protocol IGeocoderNetworkService {
+public protocol IGeocoderNetworkService {
     func getCities(for searchText: String, completion: @escaping (Result<[CityDTO], Error>) -> ())
     func getCities(lat: Double, lon: Double, completion: @escaping (Result<[CityDTO], Error>) -> ())
 }
 
-final class GeocoderNetworkService: IGeocoderNetworkService {
-    private let networkService = NetworkService(dataTaskFactory: URLSession.shared)
+public final class GeocoderNetworkService: IGeocoderNetworkService {
+    private let networkService: INetworkService
     
-    func getCities(for searchText: String, completion: @escaping (Result<[CityDTO], Error>) -> ()) {
-        let urlString = "http://api.openweathermap.org/geo/1.0/direct?q=\(searchText)&limit=\(5)&appid=\(GeocoderNetworkServiceAPIKey.openWeatherKey)"
+    public init(networkService: INetworkService) {
+        self.networkService = networkService
+    }
+    
+    public func getCities(for searchText: String, completion: @escaping (Result<[CityDTO], Error>) -> ()) {
+        let urlString = "http://api.openweathermap.org/geo/1.0/direct?q=\(searchText)&limit=\(5)&appid=\(APIKeys.openWeatherKey)"
         
         if let url = URL(string: urlString) {
             networkService.fetch(url: url, completion: completion)
@@ -27,8 +31,8 @@ final class GeocoderNetworkService: IGeocoderNetworkService {
         }
     }
     
-    func getCities(lat: Double, lon: Double, completion: @escaping (Result<[CityDTO], Error>) -> ()) {
-        let urlString = "http://api.openweathermap.org/geo/1.0/reverse?lat=\(lat)&lon=\(lon)&limit=\(1)&appid=\(GeocoderNetworkServiceAPIKey.openWeatherKey)"
+    public func getCities(lat: Double, lon: Double, completion: @escaping (Result<[CityDTO], Error>) -> ()) {
+        let urlString = "http://api.openweathermap.org/geo/1.0/reverse?lat=\(lat)&lon=\(lon)&limit=\(1)&appid=\(APIKeys.openWeatherKey)"
         
         if let url = URL(string: urlString) {
             networkService.fetch(url: url, completion: completion)

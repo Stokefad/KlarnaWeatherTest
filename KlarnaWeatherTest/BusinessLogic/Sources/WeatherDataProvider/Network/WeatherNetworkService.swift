@@ -17,7 +17,7 @@ public final class WeatherNetworkService: IWeatherNetworkService {
     }
     
     public func requestWeather(lat: CGFloat, lon: CGFloat, completion: @escaping (Result<WeatherDTO, Error>) -> ()) {
-        let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(WeatherNetworkServiceAPIKey.openWeatherKey)"
+        let urlString = "https://api.openweathermap.org/data/2.5/weather?lat=\(lat)&lon=\(lon)&appid=\(APIKeys.openWeatherKey)"
 
         if let url = URL(string: urlString) {
             networkService.fetch(url: url, completion: completion)

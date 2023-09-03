@@ -38,6 +38,6 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "BusinessLogicTests",
-            dependencies: []),
+            dependencies: ["NetworkService", "GeocoderDataProvider"]),
     ]
 )

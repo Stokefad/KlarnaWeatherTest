@@ -7,7 +7,21 @@
 
 import Foundation
 
-struct CityDTO: Decodable {
+public struct CityDTO: Decodable {
+    init(
+        name: String,
+        country: String,
+        state: String,
+        lat: Double,
+        lon: Double
+    ) {
+        self.name = name
+        self.country = country
+        self.state = state
+        self.lat = lat
+        self.lon = lon
+    }
+
     let name: String
     let country: String
     let state: String
