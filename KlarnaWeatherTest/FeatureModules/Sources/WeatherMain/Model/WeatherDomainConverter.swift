@@ -10,8 +10,19 @@ import DomainModels
 import SharedModels
 import Foundation
 
-final class WeatherDomainConverter {
-    static func convert(_ domain: WeatherDomain, currentTemperatureUnit: TemperatureUnitDomain) -> Weather {
+protocol IWeatherDomainConverter {
+    func convert(_ domain: WeatherDomain, currentTemperatureUnit: TemperatureUnitDomain) -> Weather
+}
+
+final class WeatherDomainConverter: IWeatherDomainConverter {
+    
+    private let cityDomainConverter: ICityDomainConverter
+    
+    public init(cityDomainConverter: ICityDomainConverter) {
+        self.cityDomainConverter = cityDomainConverter
+    }
+    
+    func convert(_ domain: WeatherDomain, currentTemperatureUnit: TemperatureUnitDomain) -> Weather {
         let temperature: String
         switch currentTemperatureUnit {
         case .celcius:
@@ -22,6 +33,6 @@ final class WeatherDomainConverter {
             temperature = "\(Int((domain.temperature - 273.15) * (9 / 5) + 32))°F"
         }
         
-        return Weather(city: CityDomainConverter.convert(domain.city), temperature: temperature)
+        return Weather(city: cityDomainConverter.convert(domain.city), temperature: temperature)
     }
 }

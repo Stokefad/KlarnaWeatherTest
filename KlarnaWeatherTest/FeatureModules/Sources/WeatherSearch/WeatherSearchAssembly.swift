@@ -9,6 +9,7 @@ import GeocoderDataProvider
 import DomainModels
 import UIKit
 import Foundation
+import SharedModels
 import Utils
 
 public protocol IWeatherSearchOutputDelegate: AnyObject {
@@ -28,7 +29,7 @@ public final class WeatherSearchModule {
 public final class WeatherSearchAssembly {
     public static func assembly(delegate: IWeatherSearchOutputDelegate) -> WeatherSearchModule {
         let geocoder = GeocoderAssembly.assembly()
-        let presenter = WeatherSearchPresenter(geocoderDataProvider: geocoder, debouncer: Debouncer())
+        let presenter = WeatherSearchPresenter(geocoderDataProvider: geocoder, debouncer: Debouncer(), cityDomainConverter: CityDomainConverter())
         let viewController = WeatherSearchViewController(presenter: presenter)
         presenter.view = viewController
         presenter.output = delegate

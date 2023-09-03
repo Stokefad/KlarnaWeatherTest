@@ -12,6 +12,6 @@ import Foundation
 
 public final class WeatherDataProviderAssembly {
     public static func assembly() -> WeatherDataProvider {
-        WeatherDataProvider(networkService: WeatherNetworkService(networkService: NetworkService(dataTaskFactory: URLSession.shared)), locationService: LocationService(), geocoderDataProvider: GeocoderAssembly.assembly())
+        WeatherDataProvider(networkService: WeatherNetworkService(networkService: NetworkService(dataTaskFactory: URLSession.shared)), locationService: LocationService(), geocoderDataProvider: GeocoderAssembly.assembly(), weatherModelConverter: WeatherModelConverter())
     }
 }

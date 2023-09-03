@@ -8,8 +8,12 @@
 import TemperatureUnitPickedService
 import Foundation
 
-final class TemperatureUnitConverter {
-    static func convert(_ domain: TemperatureUnitDomain) -> TemperatureUnit {
+protocol ITemperatureUnitConverter {
+    func convert(_ domain: TemperatureUnitDomain) -> TemperatureUnit
+}
+
+final class TemperatureUnitConverter: ITemperatureUnitConverter {
+    func convert(_ domain: TemperatureUnitDomain) -> TemperatureUnit {
         switch domain {
         case .celcius:
             return TemperatureUnit(name: "celcius")

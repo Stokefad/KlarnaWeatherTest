@@ -9,6 +9,7 @@ import Foundation
 import WeatherDataProvider
 import TemperatureUnitPickedService
 import DomainModels
+import SharedModels
 import UIKit
 
 public protocol IWeatherModuleDelegate: AnyObject {
@@ -32,7 +33,13 @@ public final class WeatherMainModule {
 public final class WeatherMainAssembly {
     public static func assembly(delegate: IWeatherModuleDelegate) -> WeatherMainModule {
         let dataProvider = WeatherDataProviderAssembly.assembly()
-        let presenter = WeatherPresenter(weatherDataProvider: dataProvider, unitPickedService: TemperatureUnitPickedService())
+        let presenter = WeatherPresenter(
+            weatherDataProvider: dataProvider,
+            unitPickedService: TemperatureUnitPickedService(),
+            weatherDomainConverter: WeatherDomainConverter(cityDomainConverter: CityDomainConverter()),
+            errorConverter: ErrorConverter(),
+            temperatureUnitConverter: TemperatureUnitConverter()
+        )
         dataProvider.delegate = presenter
         let viewController = WeatherViewController(presenter: presenter)
         presenter.view = viewController

@@ -8,8 +8,14 @@
 import WeatherDataProvider
 import Foundation
 
-public final class ErrorConverter {
-    public static func convert(_ error: WeatherDataProviderError) -> String {
+public protocol IErrorConverter {
+    func convert(_ error: WeatherDataProviderError) -> String
+}
+
+public final class ErrorConverter: IErrorConverter {
+    public init() {}
+    
+    public func convert(_ error: WeatherDataProviderError) -> String {
         switch error {
         case .locationError:
             return "Unable to get location"

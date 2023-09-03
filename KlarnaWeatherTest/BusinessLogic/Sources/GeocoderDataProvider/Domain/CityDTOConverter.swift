@@ -8,8 +8,12 @@
 import DomainModels
 import Foundation
 
-final class CityDTOConverter {
-    static func convert(_ dto: CityDTO) -> CityDomain {
+protocol ICityDTOConverter {
+    func convert(_ dto: CityDTO) -> CityDomain
+}
+
+final class CityDTOConverter: ICityDTOConverter {
+    func convert(_ dto: CityDTO) -> CityDomain {
         CityDomain(name: dto.name, lat: dto.lat, lon: dto.lon, country: dto.country, state: dto.state)
     }
 }

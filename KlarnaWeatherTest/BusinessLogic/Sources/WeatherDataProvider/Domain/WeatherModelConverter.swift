@@ -8,8 +8,12 @@
 import DomainModels
 import Foundation
 
-final class WeatherModelConverter {
-    static func convert(_ dto: WeatherDTO, in city: CityDomain) -> WeatherDomain {
+protocol IWeatherModelConverter {
+    func convert(_ dto: WeatherDTO, in city: CityDomain) -> WeatherDomain
+}
+
+final class WeatherModelConverter: IWeatherModelConverter {
+    func convert(_ dto: WeatherDTO, in city: CityDomain) -> WeatherDomain {
         WeatherDomain(city: city, temperature: dto.main.temp)
     }
 }

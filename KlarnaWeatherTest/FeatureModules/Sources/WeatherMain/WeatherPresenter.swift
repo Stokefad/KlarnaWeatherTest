@@ -27,9 +27,12 @@ final class WeatherPresenter: IWeatherPresenter {
     
     private let weatherDataProvider: IWeatherDataProvider
     private let unitPickedService: ITemperatureUnitPickedService
+    private let weatherDomainConverter: IWeatherDomainConverter
+    private let errorConverter: IErrorConverter
+    private let temperatureUnitConverter: ITemperatureUnitConverter
     
     var availableTemperatureUnitsForPresentation: [TemperatureUnit] {
-        availableTemperatureUnits.map { TemperatureUnitConverter.convert($0) }
+        availableTemperatureUnits.map { self.temperatureUnitConverter.convert($0) }
     }
     
     var selectedTemperatureUnitIndex: Int {
@@ -38,9 +41,18 @@ final class WeatherPresenter: IWeatherPresenter {
     
     private let availableTemperatureUnits: [TemperatureUnitDomain] = [.celcius, .farenheit, .kelvin]
     
-    init(weatherDataProvider: IWeatherDataProvider, unitPickedService: ITemperatureUnitPickedService) {
+    init(
+        weatherDataProvider: IWeatherDataProvider,
+        unitPickedService: ITemperatureUnitPickedService,
+        weatherDomainConverter: IWeatherDomainConverter,
+        errorConverter: IErrorConverter,
+        temperatureUnitConverter: ITemperatureUnitConverter
+    ) {
         self.weatherDataProvider = weatherDataProvider
         self.unitPickedService = unitPickedService
+        self.weatherDomainConverter = weatherDomainConverter
+        self.errorConverter = errorConverter
+        self.temperatureUnitConverter = temperatureUnitConverter
     }
     
     func viewDidLoad() {
@@ -64,13 +76,13 @@ final class WeatherPresenter: IWeatherPresenter {
 extension WeatherPresenter: IWeatherDataProviderDelegate {
     func didUpdateCurrentWeather() {
         DispatchQueue.main.async {
-            self.view?.weather = self.weatherDataProvider.currentWeather.map { WeatherDomainConverter.convert($0, currentTemperatureUnit: self.unitPickedService.currentUnit) }
+            self.view?.weather = self.weatherDataProvider.currentWeather.map { self.weatherDomainConverter.convert($0, currentTemperatureUnit: self.unitPickedService.currentUnit) }
         }
     }
     
     func errorOccured(error: WeatherDataProviderError) {
         DispatchQueue.main.async {
-            self.view?.present(errorTitle: "Error", errorText: ErrorConverter.convert(error))
+            self.view?.present(errorTitle: "Error", errorText: self.errorConverter.convert(error))
         }
     }
 }

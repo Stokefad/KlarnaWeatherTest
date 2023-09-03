@@ -12,11 +12,6 @@ public enum GeneralError: Error {
     case badUrl
 }
 
-// TODO: Move to util
-public enum DomainError: Error {
-    case noDataForUrl
-}
-
 public protocol INetworkService {
     func fetch<T: Decodable>(url: URL, completion: @escaping (Result<T, Error>) -> ())
 }
@@ -33,7 +28,6 @@ public final class NetworkService: INetworkService {
         currentTask?.cancel()
         
         let request = URLRequest(url: url)
-        // TODO: inject
         let task = dataTaskFactory.dataTask(with: request) { data, _, error in
             guard let data,
                   let decodedResponse = try? JSONDecoder().decode(T.self, from: data)

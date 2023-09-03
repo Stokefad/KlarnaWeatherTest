@@ -23,18 +23,24 @@ final class WeatherSearchPresenter: IWeatherSearchPresenter {
     
     private let geocoderDataProvider: IGeocoderDataProvider
     private let debouncer: Debouncer
+    private let cityDomainConverter: ICityDomainConverter
     
     private var cities: [CityDomain] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.view?.foundCities = self.cities.map { CityDomainConverter.convert($0) }
+                self.view?.foundCities = self.cities.map { self.cityDomainConverter.convert($0) }
             }
         }
     }
     
-    init(geocoderDataProvider: IGeocoderDataProvider, debouncer: Debouncer) {
+    init(
+        geocoderDataProvider: IGeocoderDataProvider,
+        debouncer: Debouncer,
+        cityDomainConverter: ICityDomainConverter
+    ) {
         self.geocoderDataProvider = geocoderDataProvider
         self.debouncer = debouncer
+        self.cityDomainConverter = cityDomainConverter
     }
     
     func searchWasPressed(for text: String) {

@@ -7,6 +7,7 @@
 
 import Foundation
 import NetworkService
+import DomainModels
 
 public final class WeatherNetworkService: IWeatherNetworkService {
     private let networkService: INetworkService

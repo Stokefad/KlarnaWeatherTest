@@ -26,6 +26,7 @@ public class WeatherDataProvider: IWeatherDataProvider {
     private let networkService: IWeatherNetworkService
     private let geocoderDataProvider: IGeocoderDataProvider
     private let locationService: ILocationService
+    private let weatherModelConverter: IWeatherModelConverter
     
     public var currentWeather: WeatherDomain? {
         didSet {
@@ -36,11 +37,13 @@ public class WeatherDataProvider: IWeatherDataProvider {
     init(
         networkService: IWeatherNetworkService,
         locationService: ILocationService,
-        geocoderDataProvider: IGeocoderDataProvider
+        geocoderDataProvider: IGeocoderDataProvider,
+        weatherModelConverter: IWeatherModelConverter
     ) {
         self.networkService = networkService
         self.locationService = locationService
         self.geocoderDataProvider = geocoderDataProvider
+        self.weatherModelConverter = weatherModelConverter
     }
     
     public func updateCurrentLocationWeather() {
@@ -72,7 +75,7 @@ public class WeatherDataProvider: IWeatherDataProvider {
             completion: { [weak self] result in
                 switch result {
                 case let .success(weather):
-                    self?.currentWeather = WeatherModelConverter.convert(weather, in: city)
+                    self?.currentWeather = self?.weatherModelConverter.convert(weather, in: city)
                 case .failure:
                     self?.currentWeather = nil
                     self?.delegate?.errorOccured(error: .noWeatherForLocation)

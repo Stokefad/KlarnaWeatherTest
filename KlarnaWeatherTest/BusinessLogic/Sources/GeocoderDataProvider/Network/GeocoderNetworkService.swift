@@ -6,6 +6,7 @@
 //
 
 import NetworkService
+import DomainModels
 import Foundation
 
 protocol IGeocoderNetworkService {

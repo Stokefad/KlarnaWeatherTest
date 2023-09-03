@@ -8,8 +8,14 @@
 import DomainModels
 import Foundation
 
-public final class CityDomainConverter {
-    public static func convert(_ domain: CityDomain) -> City {
+public protocol ICityDomainConverter {
+    func convert(_ domain: CityDomain) -> City
+}
+
+public final class CityDomainConverter: ICityDomainConverter {
+    public init() {}
+    
+    public func convert(_ domain: CityDomain) -> City {
         .init(name: domain.name + ", " + domain.country + ", " + domain.state)
     }
 }
