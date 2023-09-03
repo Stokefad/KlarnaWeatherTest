@@ -35,6 +35,11 @@ For location search:
 2) User picks location
 3) Steps 2-3 as for current location
 
+# Reachability
+
+App is responsive to chaninging network availability. Look into ReachabilityService for details
+
+
 # Navigation
 
 Navigation is provided with WeatherCoordinator. It could be extended with other coordinators for flows and root AppCoordinator but it's not necessary for 2 screen app
