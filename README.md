@@ -35,6 +35,11 @@ For location search:
 2) User picks location
 3) Steps 2-3 as for current location
 
+# Reachability
+
+App is responsive to chaninging network availability. Look into ReachabilityService for details
+
+
 # Navigation
 
 Navigation is provided with WeatherCoordinator. It could be extended with other coordinators for flows and root AppCoordinator but it's not necessary for 2 screen app
@@ -46,7 +51,7 @@ There are several example tests written for BusinessLogic package
 
 # Dark/light mode support
 
-Asset colors are used for theme support (Color palette for this app is just 3 colors but could be extended easily)
+Asset colors are used for theme support (Color palette for this app is just 5 colors but could be extended easily)
 
 # Forecast react on location change
 
