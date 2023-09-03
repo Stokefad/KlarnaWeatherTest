@@ -6,11 +6,11 @@
 //
 
 import Foundation
-import WeatherDataProvider
 import TemperatureUnitPickedService
 import DomainModels
 import SharedModels
 import UIKit
+import WeatherDataProvider
 
 public protocol IWeatherModuleDelegate: AnyObject {
     func searchAnotherLocationClicked()

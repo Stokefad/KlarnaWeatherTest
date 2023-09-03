@@ -11,11 +11,14 @@ import LocationService
 import Foundation
 import CoreLocation
 import ReachabilityService
+import NetworkService
 
 public protocol IWeatherDataProviderDelegate: AnyObject {
     func didUpdateCurrentWeather()
     func errorOccured(error: WeatherDataProviderError, isNetworkAvailable: Bool)
     func askUserToGrantLocationUsagePermission()
+    func locationPermissionWasNotGranted()
+    func geocoderLoadingStarted()
 }
 
 public enum WeatherDataProviderError: Error {
@@ -54,7 +57,10 @@ public class WeatherDataProvider: IWeatherDataProvider {
     }
     
     public func updateCurrentLocationWeather() {
-        guard !locationService.shouldAskForLocationServicesUse else {
+        if locationService.shouldAskForLocationServicesUse {
+            delegate?.locationPermissionWasNotGranted()
+        }
+        guard !locationService.shouldAskForLocationServicesUseAfterDenied else {
             delegate?.askUserToGrantLocationUsagePermission()
             return
         }
@@ -62,6 +68,8 @@ public class WeatherDataProvider: IWeatherDataProvider {
             guard let location, let self, self.currentWeather?.isInUserLocation == true || self.currentWeather == nil else {
                 return
             }
+            
+            self.delegate?.geocoderLoadingStarted()
             
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
@@ -82,7 +90,8 @@ public class WeatherDataProvider: IWeatherDataProvider {
                 switch result {
                 case let .success(weather):
                     self?.currentWeather = self?.weatherModelConverter.convert(weather, in: city, isInUserLocation: isInUserLocation)
-                case .failure:
+                case let .failure(error):
+                    guard error as? GeneralError != .cancelled else { return }
                     self?.updateWeatherErrorOccured(city: city)
                 }
             }
@@ -94,7 +103,8 @@ public class WeatherDataProvider: IWeatherDataProvider {
             switch result {
             case .success(let city):
                 self?.requestWeather(city: city, isInUserLocation: true)
-            case .failure:
+            case let .failure(error):
+                guard error as? GeneralError != .cancelled else { return }
                 self?.geocoderErrorOccured(lat: lat, lon: lon)
             }
         })

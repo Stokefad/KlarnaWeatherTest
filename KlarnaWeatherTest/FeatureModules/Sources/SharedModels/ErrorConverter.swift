@@ -5,8 +5,8 @@
 //  Created by Igor Naumenko on 30.08.2023.
 //
 
-import WeatherDataProvider
 import Foundation
+import WeatherDataProvider
 
 public protocol IErrorConverter {
     func convert(_ error: WeatherDataProviderError) -> String

@@ -11,13 +11,17 @@ import Foundation
 
 protocol IWeatherViewController: UIViewController {
     var weather: Weather? { get set }
-    func present(title: String, message: String, completion: (() -> ())?)
+    var isContentVisible: Bool { get set }
+    var isLoading: Bool { get set }
+    var currentStateTitle: String? { get set }
+    func present(title: String, message: String, actionTitle: String?, completion: (() -> ())?)
 }
 
 final class WeatherViewController: UIViewController, IWeatherViewController {
     private let presenter: IWeatherPresenter
     
     private lazy var weatherInfoView = WeatherInfoView()
+    private lazy var contentStateInfoView = ContentStateInfoView()
     
     private lazy var anotherLocationButton: UIButton = {
         let button = ButtonFactory.regular()
@@ -41,6 +45,25 @@ final class WeatherViewController: UIViewController, IWeatherViewController {
         }
     }
     
+    var isContentVisible = false {
+        didSet {
+            weatherInfoView.isHidden = !isContentVisible
+            contentStateInfoView.isHidden = isContentVisible
+        }
+    }
+    
+    var isLoading = true {
+        didSet {
+            contentStateInfoView.isSpinnerVisible = isLoading
+        }
+    }
+    
+    var currentStateTitle: String? {
+        didSet {
+            contentStateInfoView.text = currentStateTitle
+        }
+    }
+    
     init(presenter: IWeatherPresenter) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
@@ -56,14 +79,16 @@ final class WeatherViewController: UIViewController, IWeatherViewController {
         presenter.viewDidLoad()
     }
     
-    func present(title: String, message: String, completion: (() -> ())?) {
-        let actionSettings = UIAlertAction(title: "Settings", style: .default) { _ in
-            completion?()
-        }
+    func present(title: String, message: String, actionTitle: String?, completion: (() -> ())?) {
         let actionOk = UIAlertAction(title: "Ok", style: .cancel)
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(actionOk)
-        alertController.addAction(actionSettings)
+        if let actionTitle {
+            let action = UIAlertAction(title: actionTitle, style: .default) { _ in
+                completion?()
+            }
+            alertController.addAction(action)
+        }
         present(alertController, animated: true)
     }
     
@@ -71,6 +96,7 @@ final class WeatherViewController: UIViewController, IWeatherViewController {
         view.addSubview(weatherInfoView)
         view.addSubview(anotherLocationButton)
         view.addSubview(segmentControl)
+        view.addSubview(contentStateInfoView)
         
         segmentControl.topAnchor.constraint(equalTo: view.topAnchor, constant: Indents.big * 4).isActive = true
         segmentControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Indents.regular).isActive = true
@@ -80,6 +106,10 @@ final class WeatherViewController: UIViewController, IWeatherViewController {
         weatherInfoView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         weatherInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Indents.regular).isActive = true
         weatherInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Indents.regular).isActive = true
+        
+        contentStateInfoView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        contentStateInfoView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Indents.regular).isActive = true
+        contentStateInfoView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Indents.regular).isActive = true
         
         anotherLocationButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -Indents.big).isActive = true
         anotherLocationButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Indents.regular).isActive = true

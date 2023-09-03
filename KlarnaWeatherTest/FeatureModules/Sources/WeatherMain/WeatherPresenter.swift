@@ -57,6 +57,9 @@ final class WeatherPresenter: IWeatherPresenter {
     }
     
     func viewDidLoad() {
+        view?.isLoading = true
+        view?.isContentVisible = false
+        view?.currentStateTitle = "Loading"
         weatherDataProvider.updateCurrentLocationWeather()
     }
     
@@ -77,23 +80,41 @@ final class WeatherPresenter: IWeatherPresenter {
 extension WeatherPresenter: IWeatherDataProviderDelegate {
     public func didUpdateCurrentWeather() {
         DispatchQueue.main.async {
+            self.view?.isLoading = false
+            self.view?.isContentVisible = true
             self.view?.weather = self.weatherDataProvider.currentWeather.map { self.weatherDomainConverter.convert($0, currentTemperatureUnit: self.unitPickedService.currentUnit) }
+        }
+    }
+    
+    public func locationPermissionWasNotGranted() {
+        DispatchQueue.main.async {
+            self.view?.isLoading = false
+            self.view?.currentStateTitle = "Location permission needed"
         }
     }
     
     public func askUserToGrantLocationUsagePermission() {
         DispatchQueue.main.async {
-            self.view?.present(title: "Location permission", message: "Please grant permission to use your location in order to show current weather", completion: {
+            self.view?.present(title: "Location permission", message: "Please grant permission to use your location in order to show current weather", actionTitle: "Settings", completion: {
                 guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
                 UIApplication.shared.open(url)
             })
         }
     }
     
+    public func geocoderLoadingStarted() {
+        DispatchQueue.main.async {
+            self.view?.isLoading = true
+            self.view?.currentStateTitle = "Loading"
+        }
+    }
+    
     public func errorOccured(error: WeatherDataProviderError, isNetworkAvailable: Bool) {
         guard isNetworkAvailable else { return }
         DispatchQueue.main.async {
-            self.view?.present(title: "Error", message: self.errorConverter.convert(error), completion: nil)
+            self.view?.isLoading = false
+            self.view?.currentStateTitle = self.errorConverter.convert(error)
+            self.view?.present(title: "Error", message: self.errorConverter.convert(error), actionTitle: nil, completion: nil)
         }
     }
 }

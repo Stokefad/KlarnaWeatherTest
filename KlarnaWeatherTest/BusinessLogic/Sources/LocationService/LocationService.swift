@@ -12,9 +12,17 @@ public final class LocationService: NSObject, ILocationService {
     private let locationManager = CLLocationManager()
     private var currentCompletion: ((CLLocation?) -> ())?
     
-    public var shouldAskForLocationServicesUse: Bool {
+    public var shouldAskForLocationServicesUseAfterDenied: Bool {
         if #available(iOS 14.0, *) {
             return locationManager.authorizationStatus == .denied
+        } else {
+            return false
+        }
+    }
+    
+    public var shouldAskForLocationServicesUse: Bool {
+        if #available(iOS 14.0, *) {
+            return locationManager.authorizationStatus == .denied || locationManager.authorizationStatus == .notDetermined
         } else {
             return false
         }

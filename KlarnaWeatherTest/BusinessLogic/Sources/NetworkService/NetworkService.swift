@@ -10,6 +10,7 @@ import Foundation
 public enum GeneralError: Error {
     case badResponse
     case badUrl
+    case cancelled
 }
 
 public protocol INetworkService {
@@ -31,11 +32,15 @@ public final class NetworkService: INetworkService {
             self?.currentTask?.cancel()
             
             let request = URLRequest(url: url)
-            let task = self?.dataTaskFactory.dataTask(with: request) { data, _, error in
+            let task = self?.dataTaskFactory.dataTask(with: request) { data, response, error in
                 guard let data,
                       let decodedResponse = try? JSONDecoder().decode(T.self, from: data)
                 else {
-                    completion(.failure(GeneralError.badResponse))
+                    if (error as? URLError)?.errorCode != -999 {
+                        completion(.failure(GeneralError.badResponse))
+                    } else {
+                        completion(.failure(GeneralError.cancelled))
+                    }
                     return
                 }
                 
